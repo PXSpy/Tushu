@@ -1,48 +1,48 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-//´´½¨½á¹¹Ìå 
+//åˆ›å»ºç»“æž„ä½“ 
 struct bookinfo{
 	char name[20];
 	double price;
 	int sum;
 };
-//´´½¨Á´±í 
+//åˆ›å»ºé“¾è¡¨ 
 struct node{
 	struct bookinfo data;
 	struct node* next;
 };
-//´´½¨±íÍ·±íÍ·²»´æÈÎºÎÊý¾Ý 
+//åˆ›å»ºè¡¨å¤´è¡¨å¤´ä¸å­˜ä»»ä½•æ•°æ® 
 struct node* createhead(){
 	struct node* headnode=(struct node*)malloc(sizeof(struct node));
 	headnode->next=NULL;
 	return headnode;
 }
-//´´½¨½Úµã£¬½«ÐÅÏ¢ÊäÈëµ½½ÚµãÖÐ 
+//åˆ›å»ºèŠ‚ç‚¹ï¼Œå°†ä¿¡æ¯è¾“å…¥åˆ°èŠ‚ç‚¹ä¸­ 
 struct node* createnode(struct bookinfo data){
 	struct node* newnode=(struct node*)malloc(sizeof(struct node));
 	newnode->data=data;
 	newnode->next=NULL;
 	return newnode;
 }
-//Îªlistbook¸³Ò»¸öÈ«¾Ö±äÁ¿ 
+//ä¸ºlistbookèµ‹ä¸€ä¸ªå…¨å±€å˜é‡ 
 struct node* listbook=NULL;
-//±íÍ··¨²åÈëÐÂ½Úµã 
+//è¡¨å¤´æ³•æ’å…¥æ–°èŠ‚ç‚¹ 
 void insertnodebyhead(struct node* headnode,struct bookinfo data){
 	struct node* newnode=createnode(data);
 	newnode->next=headnode->next;
 	headnode->next=newnode;
 }
-//´òÓ¡Á´±í 
+//æ‰“å°é“¾è¡¨ 
 void printflist(struct node* headnode){
 	struct node* print=headnode->next;
-	printf("ÊéÃû\t¼Û¸ñ\tÊýÁ¿\n");
+	printf("ä¹¦å\tä»·æ ¼\tæ•°é‡\n");
 	while(print!=NULL){
 		printf("%s\t%.1f\t%d\n",print->data.name,print->data.price,print->data.sum);
 		print=print->next;
 	}
 }
-//²éÕÒÊý¾Ý
+//æŸ¥æ‰¾æ•°æ®
 struct node* searchbookbyname(struct node* headnode,char* bookname){
 	struct node* posnode=headnode->next;
 	while(posnode!=NULL&&strcmp(posnode->data.name,bookname)){
@@ -50,7 +50,7 @@ struct node* searchbookbyname(struct node* headnode,char* bookname){
 	}
 	return posnode;
 } 
-//É¾³ýÊý¾Ý
+//åˆ é™¤æ•°æ®
 void deletebookbyname(struct node* headnode,char* bookname){
 	struct node* posnode=headnode->next;
 	struct node* posleftnode=headnode;
@@ -59,15 +59,15 @@ void deletebookbyname(struct node* headnode,char* bookname){
 		posnode=posleftnode->next;
 	}
 	if(posnode==NULL){
-		printf("ÄúÏëÉ¾³ýµÄÊé¼®ÔÚÍ¼Êé¹Ý²»´æÔÚ£¡");
+		printf("æ‚¨æƒ³åˆ é™¤çš„ä¹¦ç±åœ¨å›¾ä¹¦é¦†ä¸å­˜åœ¨ï¼");
 	} else{
-		printf("É¾³ý³É¹¦");
+		printf("åˆ é™¤æˆåŠŸ");
 		posleftnode->next=posnode->next;
 	    free(posnode);
 	    posnode=NULL;
 	}
 } 
-//ÅÅÐò
+//æŽ’åº
 void sortbookbyprice(struct node* headnode){
 	for(struct node* p=headnode->next;p->next!=NULL;p=p->next){
 		if(p->data.price<p->next->data.price){
@@ -78,22 +78,22 @@ void sortbookbyprice(struct node* headnode){
 	}
 	printflist(headnode); 
 } 
-//×ö³õÊ¼½çÃæ 
+//åšåˆå§‹ç•Œé¢ 
 void makemenu(){
 	printf("------------------------------------------------------------------------------------------------------------------------");
-	printf("»¶Ó­´ò¿ªÍ¼Êé¹ÜÀíÏµÍ³\n");
-	printf("0.ÍË³öÏµÍ³\n");
-	printf("1.µÇ¼ÇÊé¼®\n"); 
-	printf("2.ä¯ÀÀÊé¼®\n"); 
-	printf("3.½èÔÄÊé¼®\n"); 
-	printf("4.¹é»¹Êé¼®\n"); 
-	printf("5.ÅÅÐòÊé¼®\n"); 
-	printf("6.É¾³ýÊé¼®\n"); 
-	printf("7.²éÕÒÊé¼®\n"); 
+	printf("æ¬¢è¿Žæ‰“å¼€å›¾ä¹¦ç®¡ç†ç³»ç»Ÿ\n");
+	printf("0.é€€å‡ºç³»ç»Ÿ\n");
+	printf("1.ç™»è®°ä¹¦ç±\n"); 
+	printf("2.æµè§ˆä¹¦ç±\n"); 
+	printf("3.å€Ÿé˜…ä¹¦ç±\n"); 
+	printf("4.å½’è¿˜ä¹¦ç±\n"); 
+	printf("5.æŽ’åºä¹¦ç±\n"); 
+	printf("6.åˆ é™¤ä¹¦ç±\n"); 
+	printf("7.æŸ¥æ‰¾ä¹¦ç±\n"); 
 	printf("-----------------------------------------------------------------------------------------------------------------------");
-	printf("ÇëÊäÈëÄúÏë½øÐÐµÄ²Ù×÷£º");
+	printf("è¯·è¾“å…¥æ‚¨æƒ³è¿›è¡Œçš„æ“ä½œï¼š");
 }
-//±£´æÎÄ¼þ 
+//ä¿å­˜æ–‡ä»¶ 
 void saveinfotofile(const char* filename,struct node* headnode){
 	FILE* fp=fopen(filename,"w");
 	struct node* fprint=headnode->next;
@@ -103,7 +103,7 @@ void saveinfotofile(const char* filename,struct node* headnode){
 	}
 	fclose(fp);
 }
-//¶ÁÐ´ÎÄ¼þ 
+//è¯»å†™æ–‡ä»¶ 
 void readinfotofile(const char* filename,struct node* headnode){
 	FILE* fp=fopen(filename,"r");
 	if(fp==NULL){
@@ -115,78 +115,78 @@ void readinfotofile(const char* filename,struct node* headnode){
 	}
 	fclose(fp);
 }
-//½»»¥Ãæ°å 
+//äº¤äº’é¢æ¿ 
 void keydown(){
 	struct bookinfo tempbook;
 	struct node* result;
 	int userkey=0;
 	scanf("%d",&userkey);
 	switch(userkey){
-		case 0:printf("¡¾ÍË³ö¡¿\n");
-		        printf("ÍË³ö³É¹¦£¡\n");
+		case 0:printf("ã€é€€å‡ºã€‘\n");
+		        printf("é€€å‡ºæˆåŠŸï¼\n");
 		        system("pause");
 		        exit(0);
 				break;
-		case 1:printf("¡¾µÇ¼Ç¡¿\n");
-		        printf("ÇëÊäÈëÄúÏëÒªµÇ¼ÇµÄÊé¼®ÐÅÏ¢£¨ÊéÃû¡¢¼Û¸ñ¡¢ÊýÁ¿£©:");
+		case 1:printf("ã€ç™»è®°ã€‘\n");
+		        printf("è¯·è¾“å…¥æ‚¨æƒ³è¦ç™»è®°çš„ä¹¦ç±ä¿¡æ¯ï¼ˆä¹¦åã€ä»·æ ¼ã€æ•°é‡ï¼‰:");
 		        scanf("%s %lf %d",tempbook.name,&tempbook.price,&tempbook.sum);
 		        insertnodebyhead(listbook,tempbook);
 		        saveinfotofile("bookinfoplus.txt",listbook);
 				break;
-		case 2:printf("¡¾ä¯ÀÀ¡¿\n");
+		case 2:printf("ã€æµè§ˆã€‘\n");
 		        printflist(listbook);
 				break;
-		case 3:printf("¡¾½èÔÄ¡¿\n");
-		        printf("ÇëÊäÈëÄúÏëÒª½èÔÄµÄÊé¼®£º");
+		case 3:printf("ã€å€Ÿé˜…ã€‘\n");
+		        printf("è¯·è¾“å…¥æ‚¨æƒ³è¦å€Ÿé˜…çš„ä¹¦ç±ï¼š");
 		        scanf("%s",tempbook.name);
 		        result=searchbookbyname(listbook,tempbook.name);
 		        if(result==NULL){
-		        	printf("Í¼Êé¹Ý²»´æÔÚ¸ÃÊé¼®£¡");
+		        	printf("å›¾ä¹¦é¦†ä¸å­˜åœ¨è¯¥ä¹¦ç±ï¼");
 				}else{
 					if(result->data.sum>0){
-						printf("½èÔÄ³É¹¦£¡\n");
+						printf("å€Ÿé˜…æˆåŠŸï¼\n");
 						result->data.sum--;
-						printf("%s»¹Ê£Óà%d±¾",result->data.name,result->data.sum);
+						printf("%sè¿˜å‰©ä½™%dæœ¬",result->data.name,result->data.sum);
 					}
 				}
 				saveinfotofile("bookinfoplus.txt",listbook);
 				break;
-		case 4:printf("¡¾¹é»¹¡¿\n");
-		        printf("ÇëÊäÈëÄúÏëÒª¹é»¹µÄÊé¼®:");
+		case 4:printf("ã€å½’è¿˜ã€‘\n");
+		        printf("è¯·è¾“å…¥æ‚¨æƒ³è¦å½’è¿˜çš„ä¹¦ç±:");
 		        scanf("%s",tempbook.name);
 		        result=searchbookbyname(listbook,tempbook.name);
 		        if(result==NULL){
-		        	printf("¸ÃÊé²»ÊôÓÚÍ¼Êé¹Ý£¡");
+		        	printf("è¯¥ä¹¦ä¸å±žäºŽå›¾ä¹¦é¦†ï¼");
 				}else{
-					printf("¹é»¹³É¹¦!\n");
+					printf("å½’è¿˜æˆåŠŸ!\n");
 					result->data.sum++;
-					printf("%s»¹Ê£Óà%d±¾",result->data.name,result->data.sum);
+					printf("%sè¿˜å‰©ä½™%dæœ¬",result->data.name,result->data.sum);
 				}
 				saveinfotofile("bookinfoplus.txt",listbook);
 				break;
-		case 5:printf("¡¾ÅÅÐò¡¿\n");
+		case 5:printf("ã€æŽ’åºã€‘\n");
 		        sortbookbyprice(listbook);
 				break;
-		case 6:printf("¡¾É¾³ý¡¿\n");
-		        printf("ÇëÊäÈëÄúÏëÉ¾³ýµÄÊé¼®£º");
+		case 6:printf("ã€åˆ é™¤ã€‘\n");
+		        printf("è¯·è¾“å…¥æ‚¨æƒ³åˆ é™¤çš„ä¹¦ç±ï¼š");
 		        scanf("%s",tempbook.name);
 		        deletebookbyname(listbook,tempbook.name);
 		        saveinfotofile("bookinfoplus.txt",listbook);
 				break;
-		case 7:printf("¡¾²éÕÒ¡¿\n");
-		        printf("ÇëÊäÈëÄúÏëÒª²éÕÒµÄÊé¼®£º");
+		case 7:printf("ã€æŸ¥æ‰¾ã€‘\n");
+		        printf("è¯·è¾“å…¥æ‚¨æƒ³è¦æŸ¥æ‰¾çš„ä¹¦ç±ï¼š");
 		        scanf("%s",tempbook.name);
 		        result=searchbookbyname(listbook,tempbook.name);
 		        if(result==NULL){
-		        	printf("ÄúËù²éÕÒµÄÊé¼®²»ÊôÓÚÍ¼Êé¹Ý£¡");
+		        	printf("æ‚¨æ‰€æŸ¥æ‰¾çš„ä¹¦ç±ä¸å±žäºŽå›¾ä¹¦é¦†ï¼");
 				}else{
-					printf("ÊéÃû\t¼Û¸ñ\tÊýÁ¿\n");
+					printf("ä¹¦å\tä»·æ ¼\tæ•°é‡\n");
 					printf("%s\t%.1f\t%d\n",result->data.name,result->data.price,result->data.sum);
 				}
 				break;
 	}
 }
-//Ö÷Ìâº¯Êý 
+//ä¸»é¢˜å‡½æ•° 
 int main(){
 	listbook=createhead();
 	readinfotofile("bookinfoplus.txt",listbook);
